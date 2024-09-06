@@ -3,11 +3,24 @@ const button_find = document.querySelector('button#search');
 const text_find = document.querySelector('input#search');
 const button_c = document.querySelector('button#c');
 const button_f = document.querySelector('button#f');
+const loading = document.querySelector('dialog#loading');
+let loading_text = document.querySelector('dialog#loading h1');
 let unit = "metric";
 
 
 async function find_weather(place, unit) {
+    loading.showModal();
     const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${place}/next7days?unitGroup=${unit}&key=BF3M7227BV3YDJD9YV93QP2BM`, { mode: 'cors' });
+    if (!response.ok && response.status === 400) {
+        setTimeout(() => {
+            loading_text.textContent = "Did not find the city. Please check your input.";
+            setTimeout(() => {
+                loading.close();
+                loading_text.textContent = "loading...";
+            }, 1000);
+        }, 0); // Display the message immediately
+        return;
+    }
     const datas = await response.json();
     console.log(datas);
     let description_general = datas.description;
@@ -22,6 +35,7 @@ async function find_weather(place, unit) {
         console.log(icon, description, humidity, temp);
     }
     console.log(description_general);
+    loading.close();
     // if (datas.data.images === undefined) {
     //   alert(datas.meta.msg);
     //   return;
@@ -41,6 +55,10 @@ async function find_weather(place, unit) {
 //       img.src = datas.data.images.original.url;
 //     }
 //   }
+
+async function display_weather(){
+    
+}
 
 button_find.addEventListener('click', () => {
     let text = text_find.value;

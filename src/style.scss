@@ -1,3 +1,19 @@
+$main-theme-color: #2f88ff;
+
+@mixin kaisei-harunoumi($weight: 400) {
+    font-family: "Kaisei HarunoUmi", serif;
+    font-weight: $weight;
+    font-style: normal;
+}
+@mixin textGradient($color: $main-theme-color) {
+    background: linear-gradient(to right, $color, #3b3b3b);
+    // Clip the background to the text
+    -webkit-background-clip: text;
+    background-clip: text;
+    // Set the fill color to transparent to allow the background gradient to show through
+    color: transparent;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,9 +23,116 @@ body {
     font-size: 12px;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+}
+header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    min-height: 10%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 1px 5px 5px;
+    position: fixed;
+    top: 0;
+
+    #title {
+        @include textGradient();
+        @include kaisei-harunoumi($weight: 700);
+        font-size: 3rem;
+        border-bottom: black solid 0.2rem;
+        width: calc(30%);
+        text-align: center;
+        padding: 2.5rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    button {
+        @include kaisei-harunoumi($weight: 700);
+        font-size: 1.5rem;
+        appearance: none;
+        background-color: transparent;
+        border: none;
+        color: #3b3b3b;
+        cursor: pointer;
+        outline: none;
+        padding: 16px 24px;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        width: 100%;
+        height: 90%;
+        align-self: center;
+
+        &:disabled {
+            pointer-events: none;
+        }
+    
+        &:hover {
+            color: #fff;
+            background-color: #1a1a1a;
+            box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+            border-radius: 15px;
+        }
+    
+        &:active {
+            box-shadow: none;
+        }
+    }
+
+    .search{
+        width: 50%;
+        height: fit-content;
+        input{
+            min-width: 50%;
+            min-height: 3rem;
+            font-size: 2rem;
+            padding: 1rem;
+            border-radius: 1rem;
+            border-color: #1a1a1a;
+            text-align: center;
+        }
+        button{
+            width: 15%;
+        }
+    }
+
+    .units{
+        width: fit-content;
+        height: fit-content;
+
+    }
+}
+#content{
+    width: 100vw;
+    max-height: 90%;
 }
 
+dialog#loading{
+    width: fit-content;
+    height: fit-content;
+    padding: 2rem;
+    transform: translate(-50%, -50%);
+    color: whitesmoke;
+    background-color: #1e1e1e;
+    border-radius: 2.375rem;
+    border: none;
+    position: fixed;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    h1{
+        font-size: 2rem;
+        @include kaisei-harunoumi();
+    }
+}
+
+
+// the following is the tool class
 .click{
     background-color: black;
     color: whitesmoke;
 }
+
