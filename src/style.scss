@@ -24,16 +24,19 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    min-height: 100vh;
+    position: fixed;
+    width: 100%;
 }
 header {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    min-height: 10%;
+    height: 20%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.25) 1px 5px 5px;
-    position: fixed;
+    position: relative;
     top: 0;
 
     #title {
@@ -43,7 +46,7 @@ header {
         border-bottom: black solid 0.2rem;
         width: calc(30%);
         text-align: center;
-        padding: 2.5rem;
+        padding: 3rem;
         padding-left: 0;
         padding-right: 0;
     }
@@ -69,23 +72,23 @@ header {
         &:disabled {
             pointer-events: none;
         }
-    
+
         &:hover {
             color: #fff;
             background-color: #1a1a1a;
             box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
             border-radius: 15px;
         }
-    
+
         &:active {
             box-shadow: none;
         }
     }
 
-    .search{
+    .search {
         width: 50%;
         height: fit-content;
-        input{
+        input {
             min-width: 50%;
             min-height: 3rem;
             font-size: 2rem;
@@ -94,23 +97,78 @@ header {
             border-color: #1a1a1a;
             text-align: center;
         }
-        button{
+        button {
             width: 15%;
         }
     }
 
-    .units{
+    .units {
         width: fit-content;
         height: fit-content;
-
     }
 }
-#content{
-    width: 100vw;
-    max-height: 90%;
+#content {
+    height: 80%;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    gap: 1rem;
+    padding: 3%;
+
+    #general_desc{
+        @include kaisei-harunoumi(); 
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    #infos{
+        display: flex;
+        gap: 10vw;
+        align-items: center;
+        margin: 1rem;
+        overflow: scroll;
+        height: 60vh;
+        .info {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            min-width: 20vw;
+            min-height: 30vh;
+            gap: 1rem;
+            @include kaisei-harunoumi();
+            .temp_min_max{
+                display: grid;
+                width: 20vw;
+                text-align: center;
+                justify-content: center;
+                grid-template-columns: 50% 50%;
+                grid-template-rows: auto;
+                grid-template-areas: 
+                ".temp_minmax .temp_minmax";
+                .temp_minmax{
+                    justify-self: center;  
+                    margin: 1rem;
+                }
+            }
+    
+            img{
+                width: 30%;
+            }
+            h1{
+                font-size: 2rem;
+            }
+            h2{
+                font-size: 1.4rem;
+            }
+            p{
+                font-size: 1.2rem;
+            }
+        }
+    }
 }
 
-dialog#loading{
+dialog#loading {
     width: fit-content;
     height: fit-content;
     padding: 2rem;
@@ -123,16 +181,14 @@ dialog#loading{
     align-items: center;
     top: 50%;
     left: 50%;
-    h1{
+    h1 {
         font-size: 2rem;
         @include kaisei-harunoumi();
     }
 }
 
-
 // the following is the tool class
-.click{
+.click {
     background-color: black;
     color: whitesmoke;
 }
-

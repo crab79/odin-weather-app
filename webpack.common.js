@@ -7,6 +7,7 @@ module.exports = {
     entry: {
 
         app: './src/index.js',
+        icon: './src/icons.js',
 
     },
 
